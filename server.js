@@ -4,6 +4,7 @@ const colors = require("colors");
 const config = require("./config/config");
 const authRouter = require("./routes/authRoutes");
 const connectDB = require("./config/db");
+const bookmarkRouter = require("./routes/bookmarkRoutes");
 
 const app = express();
 const PORT = config.PORT || 3002;
@@ -18,7 +19,9 @@ app.get("/", (req, res) => {
     message: "This domains api is mangaed by @hemantmewada",
   });
 });
-app.use("/api", authRouter);
+// other routes
+app.use("/api/auth", authRouter);
+app.use("/api/bookmark", bookmarkRouter);
 
 connectDB().then(() => {
   app.listen(PORT, () => {
